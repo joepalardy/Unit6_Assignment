@@ -1,0 +1,163 @@
+---
+title: "Unit6_Application"
+output: html_document
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(3231)
+
+library(tidymodels)
+library(xgboost)
+library(baguette)
+library(ranger)
+library(tidyverse)
+library(skimr)
+
+```
+
+
+
+
+## Question 1 (Adapted from ISLR Chapter 8 #8)
+In this question, we'll predict Sales using a regression tree.
+
+a. Using skim, from the skimr package, quickly survey the data to determine types of data. 
+     i. Are there any factors-levels that occur very infrequently?
+    ii. Are there any predictors that are characters that need to be converted into factors?
+   iii. Are there any missing values that will need to be accounted for?
+   iv. Are there any index variables (e.g. such as names of the carseat) that need to be addressed?
+   v. Are there any variables that have zero variability?
+b. Split the data into a training set and a test set.
+c. Fit a regression tree to the training set using Sales as the response and all the other variables as predictors (features). 
+d. Predict the values in the testing set and save the RMSE.
+e. Add a cost complexity parameter to your model, and use cross-validation to select the optimal level.
+f. Predict the values in the testing set and save the MSE.
+g. Compare the MSEs in f and d. Did pruning improve RMSE?
+
+### Answer
+
+```{r Q1}
+library(ISLR)
+carseat_data <- ISLR::Carseats
+#####Setup
+###
+###Use your answers to a. to determine if you need to do any feature engineering.
+
+###Trees in R.R will have how to do the split
+
+## You may use the default parameters for the initial tree.
+##use last_fit to estimate on the training set and predict on the test set.
+
+####Bagged Trees.R has the basic setup for CV with trees. You'll want to use decision_tree instead of bagged_tree
+###cost_grid <- grid_regular(cost_complexity(), levels = 20) You can use the dials package to create the grid.
+###
+
+```
+
+
+*************************************
+  
+## Question 2 (Adapted from ISLR #9)
+a. Repeat items c-g from question 1, but this time use a bagging approach. Tune using just cost_complexity.
+b. Predict the values in the testing set and save the MSE.
+c. Compare your RMSEs from question 1 to your RMSE here. Did bagging improve your rmse? 
+d. What features are most important?
+
+
+### Answer
+
+```{r Q2}
+
+###use the code at the end of Bagged Trees.R for the importance plot.
+
+```
+
+
+
+*************************************
+  
+## Question 3
+a. Repeat items c-g from question 1, but this time use a random forest approach. Tune using mtry, min_n, and trees.
+b. Predict the values in the testing set and save the MSE.
+c. Compare your RMSEs from question 1 to your RMSE here. Did the random forest improve your RMSE? 
+d. How is a random forest different from bagging?
+ 
+
+### Answer
+
+```{r Q3}
+####Use the template in Random_Forest.R
+
+
+
+```
+
+
+## Question 4 (Adapted from ISLR #10)
+
+a. Repeat items c-g from question 1, but this time use xgboost. Tune using as many (or as few) parameters as you want.
+b. Predict the values in the testing set and save the MSE.
+c. Compare your RMSEs from question 1 to your RMSE here. Did xgboost do better than the random forest?
+
+### Answer
+
+```{r Q4}
+####
+#####Remember that you will need to update your recipe to create dummy variables for the factors.
+###the template in boosted trees.R should work
+#####xgboost is more sensitive to the format of your variables than the random forest or bagging approach.
+```
+
+
+
+## Question 5 (Adapted from ISLR #11)
+This question will use the Caravan data set and xgboost for classification.
+
+[Data dictionary for Caravan](https://liacs.leidenuniv.nl/~puttenpwhvander/library/cc2000/data.html)
+
+a. Using skim, from the skimr package, quickly survey the data to determine types of data. 
+     i. Are there any factors-levels that occur very infrequently?
+   ii. Are there any predictors that are characters that need to be converted into factors?
+    iii. Are there any missing values that will need to be accounted for?
+   iv. Are there any index variables that need to be addressed?
+    v. Are there any variables that have zero variability?
+    vi. Is your response variable a factor?
+    vii. Are there any factor variables that will need to be converted to dummies for xgboost?
+    viii. Purchase should be your positive case. Is it?
+b. Split the data into a training set and a test set.
+c. Fit a boosted tree using xgboost to the training set using Purchase as the response and all the other variables as predictors (features). Only tune the learning rate.
+d. Predict the values in the testing set and save the area under the ROC Curve.
+e. Create a confusion matrix for you results.
+f. Plot the ROC curve. Are there any issues with your classifier?
+
+### Answer
+
+```{r Q5}
+
+###Hint: use strata = Purchase to make sure you have some purchases in your training and testing data.
+####also use it in your cross-folds.
+####Use your answers to a. to help with your recipe. You may need to reorder the factor Purchase.
+#####Remember that you will need your recipe to create dummy variables for the factors if there are any.
+###classification_with_metrics.R will have the basic template.
+#####xgboost is more sensitive to the format of your variables than the random forest or bagging approach.
+###Make sure your response is a factor.
+###You may want to try scale_pos_weight
+caravan_data <- ISLR::Caravan
+####
+
+```
+
+
+## Bonus
+This question will use the Caravan data set and xgboost for classification.
+
+[Data dictionary for Caravan](https://liacs.leidenuniv.nl/~puttenpwhvander/library/cc2000/data.html)
+
+a. Instead of a tree-based method, use logistic regression or KNN to fit a model to the training data with Purchase as the response.
+b. Predict Purchases, and compare your results to those from #5. Make sure you use the same training and testing data.
+
+### Answer
+
+```{r Bonsu}
+```
