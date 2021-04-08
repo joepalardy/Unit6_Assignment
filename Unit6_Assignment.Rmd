@@ -32,7 +32,7 @@ b. Split the data into a training set and a test set.
 c. Fit a regression tree to the training set using Sales as the response and all the other variables as predictors (features). 
 d. Predict the values in the testing set and save the RMSE.
 e. Add a cost complexity parameter to your model, and use cross-validation to select the optimal level.
-f. Predict the values in the testing set and save the MSE.
+f. Predict the values in the testing set and save the RMSE.
 g. Compare the MSEs in f and d. Did pruning improve RMSE?
 
 ### Answer
@@ -60,7 +60,7 @@ carseat_data <- ISLR::Carseats
   
 ## Question 2 (Adapted from ISLR #9)
 a. Repeat items c-g from question 1, but this time use a bagging approach. Tune using just cost_complexity.
-b. Predict the values in the testing set and save the MSE.
+b. Predict the values in the testing set and save the RMSE.
 c. Compare your RMSEs from question 1 to your RMSE here. Did bagging improve your rmse? 
 d. What features are most important?
 
@@ -79,7 +79,7 @@ d. What features are most important?
   
 ## Question 3
 a. Repeat items c-g from question 1, but this time use a random forest approach. Tune using mtry, min_n, and trees.
-b. Predict the values in the testing set and save the MSE.
+b. Predict the values in the testing set and save the RMSE.
 c. Compare your RMSEs from question 1 to your RMSE here. Did the random forest improve your RMSE? 
 d. How is a random forest different from bagging?
  
@@ -97,7 +97,7 @@ d. How is a random forest different from bagging?
 ## Question 4 (Adapted from ISLR #10)
 
 a. Repeat items c-g from question 1, but this time use xgboost. Tune using as many (or as few) parameters as you want.
-b. Predict the values in the testing set and save the MSE.
+b. Predict the values in the testing set and save the RMSE.
 c. Compare your RMSEs from question 1 to your RMSE here. Did xgboost do better than the random forest?
 
 ### Answer
